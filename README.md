@@ -1,4 +1,5 @@
 # reviews_django
+<<<<<<< HEAD
 
 This README outlines the details of collaborating on this Django application.
 A short introduction of this app could easily go here.
@@ -41,3 +42,5 @@ Specify what it takes to deploy your app.
 * [Django MVC](https://www.smallsurething.com/making-ember-and-django-play-nicely-together-a-todo-mvc-walkthrough/)
 * [Django Rest Framework](http://code.tutsplus.com/tutorials/beginners-guide-to-the-django-rest-framework--cms-19786)
 * [Database Specifications](https://docs.google.com/document/d/1sWpF5l2tbd9kYB3Z98LK4i6Zplmdp7dCobCv6vcgAhA/edit)
+=======
+>>>>>>> 613aed732ab5e008b6fc6a65e6fa6c71cf893022
