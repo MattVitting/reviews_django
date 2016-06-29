@@ -21,7 +21,7 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter(trailing_slash=False)
-router.register("reviewers", ReviewerViewSet)
+router.register("reviewers/", ReviewerViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
