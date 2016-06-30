@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from models import Reviewer
-from serializers import ReviewerSerializer
-from django.http import Http404
+from models import Reviewer, Submission
+from serializers import ReviewerSerializer, SubmissionSerializer
 from rest_framework.response import Response
 
 
@@ -14,7 +13,7 @@ def post_list(request):
 
 class ReviewerViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows reviewers to be CRUDed.
+    API endpoint that returns all reviewers.
     """
     queryset = Reviewer.objects.all()
     serializer_class = ReviewerSerializer
@@ -23,7 +22,7 @@ class ReviewerViewSet(viewsets.ModelViewSet):
 
 class ReviewerDetailsViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows single reviewer to be CRUDed.
+    API endpoint that returns single reviewer by id
     """
 
 
@@ -32,5 +31,14 @@ class ReviewerDetailsViewSet(viewsets.ModelViewSet):
         r = Reviewer.objects.filter(id=pk)
         rs = ReviewerSerializer(r, context={'request': request}, many=False)
         return Response(rs.data)
+
+
+class SubmissionViewSet(viewsets.ModelViewSet):
+    """
+      API endpoint that returns all submissions
+      """
+
+    queryset = Submission.objects.all()
+    serializer_class = SubmissionSerializer
 
 
