@@ -15,6 +15,7 @@ class Reviewer(models.Model):
 
 
 class Author(models.Model):
+
     name = models.CharField(max_length=200)
     email = models.EmailField(default=None)
 
@@ -29,3 +30,12 @@ class Submission(models.Model):
     reviewdeadline = models.DateField(default=None)
     link = models.URLField(null=True)
     attachment = models.FileField(null=True)
+
+class Feedback(models.Model):
+
+    reviewer = models.OneToOneField(Reviewer)
+    submission = models.OneToOneField(Submission)
+    ratingPremise = models.IntegerField(default=0)
+    ratingResearch = models.IntegerField(default=0)
+    ratingStyle = models.IntegerField(default=0)
+    comments - models.TextField(null=True)
