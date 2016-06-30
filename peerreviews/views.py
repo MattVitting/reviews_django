@@ -25,8 +25,6 @@ class ReviewerDetailsViewSet(viewsets.ModelViewSet):
     API endpoint that returns single reviewer by id
     """
 
-
-
     def get(self, request, pk=None, format=None):
         r = Reviewer.objects.filter(id=pk)
         rs = ReviewerSerializer(r, context={'request': request}, many=False)
