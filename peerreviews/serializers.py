@@ -7,3 +7,4 @@ class ReviewerSerializer(serializers.ModelSerializer):
         model = Reviewer
         fields = ('name', 'affiliation', 'email', 'bio', 'research', 'website', 'member_date', 'number_reviews')
 
+

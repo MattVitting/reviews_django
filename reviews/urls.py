@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import include, url
-from peerreviews.views import ReviewerViewSet
-from rest_framework import routers
+from peerreviews.views import ReviewerViewSet, ReviewerDetailsViewSet
+from rest_framework import routers, views
 
 
-router = routers.DefaultRouter(trailing_slash=False)
-router.register("reviewers", ReviewerViewSet)
+router = routers.DefaultRouter()
+router.register(r'reviewers', ReviewerViewSet)
+router.register(r'reviewers/(?P<reviewer_id>[0-9]+)/$', ReviewerDetailsViewSet.as_view({'get': 'retrieve'}),base_name='reviewer-details')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
