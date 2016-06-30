@@ -38,4 +38,4 @@ class Feedback(models.Model):
     ratingPremise = models.IntegerField(default=0)
     ratingResearch = models.IntegerField(default=0)
     ratingStyle = models.IntegerField(default=0)
-    comments - models.TextField(null=True)
+    comments = models.TextField(null=True)
