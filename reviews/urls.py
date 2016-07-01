@@ -1,32 +1,20 @@
-"""reviews URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.9/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add an import:  from blog import urls as blog_urls
-    2. Import the include() function: from django.conf.urls import url, include
-    3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
-"""
 from django.contrib import admin
 from django.conf.urls import include, url
-from peerreviews.views import ReviewerViewSet, ReviewerDetailsViewSet
-from rest_framework import routers, views
+from peerreviews import views as peerviews
+from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register(r'reviewers', ReviewerViewSet)
-router.register(r'reviewers/(?P<reviewer_id>[0-9]+)/$', ReviewerDetailsViewSet.as_view({'get': 'retrieve'}),base_name='reviewer-details')
+router.register(r'reviewers', peerviews.ReviewerViewSet)
+router.register(r'reviewers/(?P<reviewer_id>[0-9]+)/$', peerviews.ReviewerDetailsViewSet.as_view({'get': 'retrieve'}),base_name='reviewer-details')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include(router.urls)),
     url(r'', include('peerreviews.urls')),
     url(r'^api/', include(router.urls)),
+    url(r'^auth/', peerviews.OsfAuthorizationUrl.as_view(), name='auth'),
+    url(r'^login/', peerviews.OsfAuthorizationCode.as_view(), name='login'),
+    url(r'^admin/', admin.site.urls, name='admin'),
+    url(r'^authenticate/', peerviews.AuthenticateUser.as_view(), name='authenticate'),
 ]
-

@@ -1,9 +1,12 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User, Group
+
+import datetime
 
 
 class Reviewer(models.Model):
-
+    user = models.OneToOneField(User)
     name = models.CharField(max_length=200)
     affiliation = models.TextField(null=True)
     email = models.EmailField(default=None)
@@ -22,6 +25,7 @@ class Author(models.Model):
 class Submission(models.Model):
 
     title = models.TextField(null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
     venue = models.TextField(null=True)
     status = models.CharField(max_length=100)
     authors = models.ManyToManyField(Author)
@@ -29,3 +33,7 @@ class Submission(models.Model):
     reviewdeadline = models.DateField(default=None)
     link = models.URLField(null=True)
     attachment = models.FileField(null=True)
+    contributor = models.ForeignKey(Group)
+
+    class Meta:
+        ordering = ('date_created',)
