@@ -39,5 +39,3 @@ class Feedback(models.Model):
     ratingStyle = models.IntegerField(default=0)
     comments = models.TextField(null=True)
 
-
-
