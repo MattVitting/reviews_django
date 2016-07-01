@@ -1,19 +1,19 @@
 from rest_framework import serializers
-from models import Reviewer, Submission, Feedback
+from models import Reviewer, Reviewslist, Feedback
 
 
 
 class ReviewerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviewer
-        fields = ('name', 'affiliation', 'email', 'bio', 'research', 'website', 'member_date', 'number_reviews')
+        fields = ('name', 'affiliation', 'email', 'bio', 'research', 'website', 'osfreviews', 'avatar')
 
 
 
-class SubmissionSerializer(serializers.ModelSerializer):
+class ReviewslistSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Submission
-        fields = ('title', 'venue', 'status', 'authors', 'reviewers', 'reviewdeadline', 'link', 'attachment')
+        model = Reviewslist
+        fields = ('title', 'conference', 'reviewdeadline', 'reviewer',  'author', 'status', 'link', 'attachment')
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
