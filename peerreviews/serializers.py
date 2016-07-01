@@ -1,12 +1,17 @@
 from rest_framework import serializers
-from models import Reviewer
 from django.contrib.auth.models import User, Group
-
+from models import Reviewer, Reviewslist, Feedback
 
 class ReviewerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviewer
         fields = ('name', 'affiliation', 'email', 'bio', 'research', 'website', 'member_date', 'number_reviews', 'contributor')
+
+class ReviewslistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reviewslist
+        fields = ('title', 'conference', 'reviewdeadline', 'reviewer',  'author', 'status', 'link', 'attachment')
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -24,3 +29,8 @@ class AuthenticationSerializer(serializers.Serializer):
 
     def validate(self, data):
         return data
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = ('reviewer', 'submission', 'ratingPremise', 'ratingResearch', 'ratingStyle', 'comments')

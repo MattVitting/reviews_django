@@ -8,6 +8,7 @@
 *.so
 *.pyc
 00*_*
+reviews/*.pyc
 
 # Packages #
 ############
