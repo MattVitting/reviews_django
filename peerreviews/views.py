@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from models import Reviewer, Submission
-from serializers import ReviewerSerializer, SubmissionSerializer
+from models import Reviewer, Reviewslist
+from serializers import ReviewerSerializer, ReviewslistSerializer
 from rest_framework.response import Response
 
 
@@ -25,20 +25,20 @@ class ReviewerDetailsViewSet(viewsets.ModelViewSet):
     API endpoint that returns single reviewer by id
     """
 
-
-
     def get(self, request, pk=None, format=None):
         r = Reviewer.objects.filter(id=pk)
         rs = ReviewerSerializer(r, context={'request': request}, many=False)
         return Response(rs.data)
 
 
-class SubmissionViewSet(viewsets.ModelViewSet):
+class ReviewslistViewSet(viewsets.ModelViewSet):
     """
       API endpoint that returns all submissions
       """
 
-    queryset = Submission.objects.all()
-    serializer_class = SubmissionSerializer
+    queryset = Reviewslist.objects.all()
+    serializer_class = ReviewslistSerializer
+
+
 
 

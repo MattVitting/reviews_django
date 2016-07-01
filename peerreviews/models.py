@@ -10,9 +10,8 @@ class Reviewer(models.Model):
     bio = models.TextField(null=True)
     research = models.TextField(null=True)
     website = models.URLField(null=True)
-    member_date = models.DateTimeField(default=timezone.now)
-    number_reviews = models.IntegerField(default=0)
-
+    osfreviews = models.IntegerField(default=0)
+    avatar = models.ImageField(blank=True, null=True, upload_to='avatars')
 
 class Author(models.Model):
 
@@ -20,22 +19,23 @@ class Author(models.Model):
     email = models.EmailField(default=None)
 
 
-class Submission(models.Model):
+class Reviewslist(models.Model):
 
     title = models.TextField(null=True)
-    venue = models.TextField(null=True)
-    status = models.CharField(max_length=100)
-    authors = models.ManyToManyField(Author)
-    reviewers = models.ForeignKey(Reviewer)
+    conference = models.TextField(null=True)
     reviewdeadline = models.DateField(default=None)
-    link = models.URLField(null=True)
-    attachment = models.FileField(null=True)
+    reviewer = models.ForeignKey(Reviewer)
+    author = models.ManyToManyField(Author)
+    status = models.CharField(max_length=100)
+    link = models.URLField(blank=True, null=True)
+    attachment = models.FileField(blank=True, null=True, upload_to='files')
 
 class Feedback(models.Model):
 
     reviewer = models.OneToOneField(Reviewer)
-    submission = models.OneToOneField(Submission)
+    submission = models.OneToOneField(Reviewslist)
     ratingPremise = models.IntegerField(default=0)
     ratingResearch = models.IntegerField(default=0)
     ratingStyle = models.IntegerField(default=0)
     comments = models.TextField(null=True)
+
