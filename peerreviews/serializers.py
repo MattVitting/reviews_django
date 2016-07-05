@@ -5,12 +5,12 @@ from models import Reviewer, Reviewslist, Feedback
 class ReviewerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviewer
-        fields = ('name', 'affiliation', 'email', 'bio', 'research', 'website', 'member_date', 'number_reviews', 'contributor')
+        fields = ('name', 'affiliation', 'email', 'bio', 'research', 'website', 'osfReviews')
 
 class ReviewslistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviewslist
-        fields = ('title', 'conference', 'reviewdeadline', 'reviewer',  'author', 'status', 'link', 'attachment')
+        fields = ('conference', 'reviewdeadline', 'reviewer',  'author', 'status', 'link', 'attachment')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):

@@ -13,7 +13,7 @@ class Reviewer(models.Model):
     bio = models.TextField(null=True)
     research = models.TextField(null=True)
     website = models.URLField(null=True)
-    osfreviews = models.IntegerField(default=0)
+    osfReviews = models.IntegerField(default=0)
     avatar = models.ImageField(blank=True, null=True, upload_to='avatars')
 
 class Author(models.Model):

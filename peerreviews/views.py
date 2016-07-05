@@ -13,31 +13,15 @@ from rest_framework import status
 
 
 USER_STORAGE = {}
+CLIENT_ID  = 'f720c20605e84d52ad24cc97e03ed3a8'
+CLIENT_SECRET = 'F4qpuFC364JtovxTMEN9R4i9kEAq6umSrcUi1XjR'
+REDIRECT_URI = "http://localhost:4200/login"
+OSF_API_URL = "https://test-api.osf.io/"
+OSF_ACCOUNTS_URL = "https://test-accounts.osf.io/"
 
 # Create your views here.
 def post_list(request):
     return render(request, 'peerreviews/test.html', {})
-
-class OsfAuthorizationUrl(APIView):
-	def get(self, request, format=None):
-		client_id  = '87ccc107d57b44b988abe7fe269bf6ba'
-		client_secret = 'vqgPeZslbbGt6kRrZX5FNeB6SincSnB1eevfHjb5'
-		oauth2_handler = OAuth2(client_id, client_secret, "https://staging-accounts.osf.io/", "http://localhost:8000/login", authorization_url='oauth2/authorize')
-		authorization_url = oauth2_handler.authorize_url('osf.full_read osf.full_write', response_type='code')
-		return Response(authorization_url)
-
-
-class OsfAuthorizationCode(APIView):
-	def get(self, request, format=None):
-		uid = request.user.id
-		CLIENT_ID  = '87ccc107d57b44b988abe7fe269bf6ba'
-		CLIENT_SECRET = 'vqgPeZslbbGt6kRrZX5FNeB6SincSnB1eevfHjb5'
-		REDIRECT_URI = "http://localhost:8000/login"
-		code = request.GET.get('code'); print code, uid
-		post_data = { "grant_type": "authorization_code", "code": code, "redirect_uri": REDIRECT_URI, "client_id": CLIENT_ID, "client_secret": CLIENT_SECRET}
-		response = requests.post("https://staging-accounts.osf.io/oauth2/token", data=post_data)
-		USER_STORAGE[uid] = response
-		return Response(USER_STORAGE[uid])
 
 class AuthenticateUser(APIView):
     resource_name = 'User'
