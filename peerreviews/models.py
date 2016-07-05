@@ -30,6 +30,8 @@ class Reviewslist(models.Model):
     link = models.URLField(blank=True, null=True)
     attachment = models.FileField(blank=True, null=True, upload_to='files')
 
+
+
 class Feedback(models.Model):
 
     reviewer = models.OneToOneField(Reviewer)
@@ -38,4 +40,5 @@ class Feedback(models.Model):
     ratingResearch = models.IntegerField(default=0)
     ratingStyle = models.IntegerField(default=0)
     comments = models.TextField(null=True)
+
 

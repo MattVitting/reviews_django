@@ -3,7 +3,9 @@ from rest_framework import viewsets
 from models import Reviewer, Reviewslist
 from serializers import ReviewerSerializer, ReviewslistSerializer
 from rest_framework.response import Response
+from rest_framework import filters
 
+from rest_framework.generics import ListCreateAPIView
 
 
 # Create your views here.
@@ -20,17 +22,6 @@ class ReviewerViewSet(viewsets.ModelViewSet):
 
 
 
-class ReviewerDetailsViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that returns single reviewer by id
-    """
-
-    def get(self, request, pk=None, format=None):
-        r = Reviewer.objects.filter(id=pk)
-        rs = ReviewerSerializer(r, context={'request': request}, many=False)
-        return Response(rs.data)
-
-
 class ReviewslistViewSet(viewsets.ModelViewSet):
     """
       API endpoint that returns all submissions
@@ -41,4 +32,15 @@ class ReviewslistViewSet(viewsets.ModelViewSet):
 
 
 
+
+
+class ReviewslistFilteredViewSet(ListCreateAPIView):
+    serializer_class = ReviewslistSerializer
+
+    queryset= Reviewslist.objects.all()
+
+    def get(self, request, rid=None, format=None):
+        rl = Reviewslist.objects.filter(reviewer_id=rid)
+        ss = ReviewslistSerializer(rl, context={'request': request}, many=True)
+        return Response(ss.data)
 
