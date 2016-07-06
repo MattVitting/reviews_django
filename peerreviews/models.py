@@ -11,7 +11,7 @@ class Reviewer(models.Model):
     research = models.TextField(null=True)
     website = models.URLField(null=True)
     osfreviews = models.IntegerField(default=0)
-    avatar = models.ImageField(blank=True, null=True, upload_to='avatars')
+    avatar = models.ImageField(blank=True, null=True, upload_to='media/avatars')
 
 class Author(models.Model):
 
@@ -28,7 +28,7 @@ class Reviewslist(models.Model):
     author = models.ManyToManyField(Author)
     status = models.CharField(max_length=100)
     link = models.URLField(blank=True, null=True)
-    attachment = models.FileField(blank=True, null=True, upload_to='files')
+    attachment = models.FileField(blank=True, null=True, upload_to='media/files')
 
 
 

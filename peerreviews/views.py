@@ -3,8 +3,7 @@ from rest_framework import viewsets
 from models import Reviewer, Reviewslist
 from serializers import ReviewerSerializer, ReviewslistSerializer
 from rest_framework.response import Response
-from rest_framework import filters
-
+from rest_framework import status
 from rest_framework.generics import ListCreateAPIView
 
 
@@ -27,10 +26,17 @@ class ReviewslistViewSet(viewsets.ModelViewSet):
       API endpoint that returns all submissions
       """
 
+
+
     queryset = Reviewslist.objects.all()
     serializer_class = ReviewslistSerializer
 
-
+    def post(self, request, format=None):
+        serializer = ReviewslistSerializer(data=request.DATA)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -43,4 +49,6 @@ class ReviewslistFilteredViewSet(ListCreateAPIView):
         rl = Reviewslist.objects.filter(reviewer_id=rid)
         ss = ReviewslistSerializer(rl, context={'request': request}, many=True)
         return Response(ss.data)
+
+
 

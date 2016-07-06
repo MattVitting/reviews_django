@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.conf.urls import include, url
 from peerreviews.views import ReviewerViewSet, ReviewslistViewSet, ReviewslistFilteredViewSet
 from rest_framework import routers
+from django.contrib.staticfiles.urls import static
+from django.conf import settings
 
 
 router = routers.DefaultRouter()
@@ -31,5 +33,5 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api/reviewers/(?P<rid>[0-9]+)/reviews/', ReviewslistFilteredViewSet.as_view(), name='list'),
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
