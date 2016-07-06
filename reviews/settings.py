@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_json_api',
+    'guardian'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -129,6 +130,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# django guardian object permissions
+# https://github.com/django-guardian/django-guardian
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # default
+    'guardian.backends.ObjectPermissionBackend',
+)
+
+
+# django cors headers
+# http://blog.hugethoughts.com/allow-cors-specific-domain-django/
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_WHITELIST = (
+        'localhost:4200',
+)
+
+ANONYMOUS_USER_ID = -1
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -144,7 +163,6 @@ USE_L10N = True
 USE_TZ = True
 
 CORS_ORIGIN_ALLOW_ALL = True
-
 
 
 STATIC_URL = '/static/'

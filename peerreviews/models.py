@@ -1,9 +1,12 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User, Group
+
+import datetime
 
 
 class Reviewer(models.Model):
-
+    user = models.OneToOneField(User,default=None)
     name = models.CharField(max_length=200)
     affiliation = models.TextField(null=True)
     email = models.EmailField(default=None)
@@ -21,8 +24,8 @@ class Author(models.Model):
 
 class Reviewslist(models.Model):
 
-    title = models.TextField(null=True)
     conference = models.TextField(null=True)
+    title = models.TextField(null=True)
     reviewdeadline = models.DateField(default=None)
     reviewer = models.ForeignKey(Reviewer)
     author = models.ManyToManyField(Author)
@@ -40,5 +43,4 @@ class Feedback(models.Model):
     ratingResearch = models.IntegerField(default=0)
     ratingStyle = models.IntegerField(default=0)
     comments = models.TextField(null=True)
-
 
