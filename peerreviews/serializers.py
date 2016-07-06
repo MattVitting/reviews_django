@@ -5,7 +5,11 @@ from models import Reviewer, Reviewslist, Feedback
 class ReviewerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviewer
-        fields = ('name', 'affiliation', 'email', 'bio', 'research', 'website', 'osfReviews')
+
+        fields = ('name', 'affiliation', 'email', 'bio', 'research', 'website', 'osfreviews', 'avatar')
+
+
+
 
 class ReviewslistSerializer(serializers.ModelSerializer):
     class Meta:
